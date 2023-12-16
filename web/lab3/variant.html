@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Заполнение инпута</title>
+</head>
+<body>
+
+  <button id="fillButton">Заполнить</button>
+  <input type="text" id="emailInput" placeholder="Введите email">
+
+  <script>
+    document.getElementById('fillButton').addEventListener('click', function() {
+      // Заполняем инпут текстом "test@email.ru"
+      document.getElementById('emailInput').value = 'test@email.ru';
+    });
+  </script>
+
+</script>
+<p>
+<button onclick="redirectToPage1()">Список студентов</button>
+<button onclick="redirectToPage3()">Вариант</button>
+
+<script>
+    // Добавьте эти две функции для перехода на другие страницы
+    function redirectToPage1() {
+        window.location.href = 'index.html'; // Замените 'page1.html' на адрес вашей первой страницы
+    }
+
+    function redirectToPage3() {
+        window.location.href = 'variant.html'; // Замените 'page3.html' на адрес вашей третьей страницы
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учет оценок учеников</title>
+</head>
+<body>
+
+<h1>Учет оценок учеников</h1>
+
+<!-- Форма для ввода оценок -->
+<form id="gradesForm">
+    <label for="studentName">Имя ученика:</label>
+    <input type="text" id="studentName" required>
+
+    <label for="grade">Оценка:</label>
+    <input type="number" id="grade" min="2" max="5" required>
+
+    <button type="button" onclick="addGrade()">Добавить оценку</button>
+</form>
+
+<!-- Таблица с записями об оценках -->
+<table border="1">
+    <thead>
+        <tr>
+            <th>Имя ученика</th>
+            <th>Оценка</th>
+        </tr>
+    </thead>
+    <tbody id="gradesTableBody">
+        <!-- Здесь будут отображаться записи об оценках -->
+    </tbody>
+</table>
+
+<!-- Кнопка для очистки данных -->
+<button onclick="clearData()">Очистить данные</button>
+
+<!-- Кнопка для подсчета среднего балла -->
+<button onclick="calculateAverage()">Подсчитать средний балл</button>
+
+<!-- Поле для отображения среднего балла -->
+<p id="averageGrade"></p>
+
+<script>
+    // Массив для хранения записей об оценках
+    let gradesData = [];
+
+    // Функция для добавления оценки в массив и обновления таблицы
+    function addGrade() {
+        const studentName = document.getElementById('studentName').value;
+        const grade = document.getElementById('grade').value;
+
+        // Проверка на пустые значения
+        if (studentName && grade) {
+            // Добавление записи в массив
+            gradesData.push({ studentName, grade });
+
+            // Обновление таблицы
+            updateTable();
+
+            // Очистка полей формы
+            document.getElementById('studentName').value = '';
+            document.getElementById('grade').value = '';
+        } else {
+            alert('Введите имя ученика и оценку');
+        }
+    }
+
+    // Функция для обновления таблицы с записями об оценках
+    function updateTable() {
+        const tableBody = document.getElementById('gradesTableBody');
+        tableBody.innerHTML = '';
+
+        // Перебор массива и добавление записей в таблицу
+        gradesData.forEach(({ studentName, grade }) => {
+            const row = tableBody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = studentName;
+            cell2.textContent = grade;
+        });
+    }
+
+    // Функция для очистки данных
+    function clearData() {
+        // Очистка массива и обновление таблицы
+        gradesData = [];
+        updateTable();
+
+        // Очистка поля для отображения среднего балла
+        document.getElementById('averageGrade').textContent = '';
+    }
+
+    // Функция для подсчета среднего балла
+    function calculateAverage() {
+        const totalGrades = gradesData.reduce((sum, { grade }) => sum + parseInt(grade), 0);
+        const average = totalGrades / gradesData.length;
+
+        // Отображение среднего балла
+        document.getElementById('averageGrade').textContent = `Средний балл: ${average.toFixed(2)}`;
+    }
+</script>
+
+<button onclick="redirectToPage1()">Список студентов</button>
+<button onclick="redirectToPage3()">Вариант</button>
+
+<script>
+    // Добавьте эти две функции для перехода на другие страницы
+    function redirectToPage1() {
+        window.location.href = 'index.html'; // Замените 'page1.html' на адрес вашей первой страницы
+    }
+
+    function redirectToPage3() {
+        window.location.href = 'variant.html'; // Замените 'page3.html' на адрес вашей третьей страницы
+    }
+</script>
+</body>
+</html>
